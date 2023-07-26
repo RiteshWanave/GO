@@ -25,7 +25,7 @@ func fillString (retunString string, toLength int) string {
 func sendFileToClient (connection net.Conn) {
 	println("A client has connected!")
 	defer connection.Close()
-	file, err := os.Open("R.txt")
+	file, err := os.Open("test.txt")
 	if err != nil {
 		println(err)
 		return
@@ -43,10 +43,11 @@ func sendFileToClient (connection net.Conn) {
 	sendBuffer := make([]byte, BUFFERSIZE)
 	println("Start sending file!")
 	for {
-		_, err := file.Read(sendBuffer)
-		if err != io.EOF {
+		data, err := file.Read(sendBuffer)
+		if err == io.EOF {
 			break
 		}
+		println(data)
 		connection.Write(sendBuffer)
 	}
 	println("File has been sent, closing connection!")

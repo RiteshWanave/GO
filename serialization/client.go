@@ -24,9 +24,9 @@ func main () {
 	fileSize, _ := strconv.ParseInt(strings.Trim(string(bufferFileSize), ":"), 10, 64)
 
 	connection.Read(bufferFileName)
-	fileName := strings.Trim(string(bufferFileName), ":")
+	// fileName := strings.Trim(string(bufferFileName), ":")
 
-	newFile, err := os.Create(fileName)
+	newFile, err := os.Create("newfile.txt")
 	if err != nil {
 		panic(err)
 	}
